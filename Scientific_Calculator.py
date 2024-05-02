@@ -4,7 +4,6 @@ from tkinter import *
 import numpy as np
 from pygame import mixer
 import speech_recognition
-from PIL import Image, ImageTk
 import math
 
 # root is instance of Tk class
@@ -120,6 +119,7 @@ def div(a,b):
 def mod(a,b):
     return a%b 
 
+
 operations = {
     "ADD":add, "ADDITION":add, "PLUS":add, "SUM":add,
     "MINUS":sub, "DIFFERENCE":sub, "SUBTRACT":sub, "SUBTRACTION":sub,
@@ -192,12 +192,7 @@ entry_obj = Entry(MainFrame, width=29, textvariable=entry_var, font="Arial 16 bo
 entry_obj.grid(columnspan=5, padx=1, pady=1)
 entry_obj.insert(0,"0")
 
-microphone_image = Image.open("./microphone.png")
-resize_microphone_image = microphone_image.resize((74,70))
-
-mic = ImageTk.PhotoImage(resize_microphone_image)
-
-microphone_button = Button(MainFrame, image= mic, bd=0, command=audio)
+microphone_button = Button(MainFrame, text= "MIC", bd=5, height=4, width=4, command=audio)
 microphone_button.grid(row=0, column=5, padx=1, pady=1)
 
 ## ======================================================== Entry screen ====================================================##
