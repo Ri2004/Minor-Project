@@ -10,7 +10,7 @@ import math
 root = Tk()
 
 # geometry() is use for give the size of GUI window and 500+50 is for bring the window in center
-root.geometry("540x608+500+50")
+root.geometry("508x612+500+50")
 
 # title() method is use for give the title of window 
 root.title("Scientific Calculator")
@@ -103,7 +103,7 @@ def equal():
     except Exception as obj:
         entry_obj.insert(0, obj)
 
-
+##=================================== Arithmetic Operations ======================================##
 def add(a,b):
     return a+b
 
@@ -119,13 +119,62 @@ def div(a,b):
 def mod(a,b):
     return a%b 
 
+def power(baseVal, powerVal):
+    return baseVal ** powerVal
 
-operations = {
+##=================================== Arithmetic Operations ======================================##
+
+##==============================================================================================##
+
+##=================================== Scientific Operations ======================================##
+def sin(val):
+    return np.sin(float(val))
+
+def cos(val):
+    return np.cos(float(val))
+
+def tan(val):
+    return np.tan(float(val))
+
+def square(val):
+    return np.square(float(val))
+
+def sqrt(val):
+    return np.sqrt(float(val))
+
+def ln(val):
+    return np.log(float(val))
+
+def log(val):
+    return np.log10(float(val))
+
+def deg(val):
+    return np.degrees(val)
+
+def rad(val):
+    return np.radians(val)
+
+def fact(val):
+    return math.factorial(int(val))
+
+def reciprocal(val):
+    return np.reciprocal(val)
+
+##=================================== Scientific Operations ======================================##
+
+# arithmeticOperations dictionary holds the scientific operation name and some other mathematical operation name and function name as value
+arithmeticOperations = {
     "ADD":add, "ADDITION":add, "PLUS":add, "SUM":add,
     "MINUS":sub, "DIFFERENCE":sub, "SUBTRACT":sub, "SUBTRACTION":sub,
     "MULTIPLY":mul, "MULTIPLICATION":mul, "PRODUCT":mul,
     "DIV":div, "DIVIDE":div, "DIVISION":div,
-    "MODULUS":mod, "REMAINDER":mod, "MOD":mod
+    "MODULUS":mod, "REMAINDER":mod, "MOD":mod, "POWER": power
+}
+
+# scientificOperations dictionary holds the scientific operation name and some other mathematical operation name and function name as value
+scientificOperations = {
+    "SIN":sin, "COS":cos, "TAN":tan, "SQUARE":square, "ROOT":sqrt, "LOGARITHMIC":ln,
+    "LOG":log, "DEGREE": deg, "RADIAN":rad, "FACTORIAL":fact, "RECIPROCAL": reciprocal
 }
 
 def findNumbers(l):
@@ -147,19 +196,34 @@ def audio():
     
     with speech_recognition.Microphone() as m:
         try:
+            # adjust_for_ambient_noise() take two argument, one is source i.e. from where it take voice and between voice how many time gap duration is present
             sr.adjust_for_ambient_noise(source= m, duration= 0.2)
+
+            # listen() method takes raw audio data from source which is passed as argument in listen()
             voice = sr.listen(m)
+
+            # recognize_google() method take raw audio data as argument and after remove irrelevant data it convert into plain text
             text = sr.recognize_google(voice)
-            print(text)
+
             text_list = text.split()
             numbers = findNumbers(text_list)
             
             for word in text_list:
-                if word.upper() in operations.keys():
-                    result = operations[word.upper()](numbers[0], numbers[1])
+                if word.upper() in arithmeticOperations.keys():
+                    result = arithmeticOperations[word.upper()](numbers[0], numbers[1])
                     entry_obj.delete(0,END)
                     entry_obj.insert(0, result)
-        
+            
+            for word in text_list:
+                if word.upper() in scientificOperations.keys():
+                    result = scientificOperations[word.upper()](numbers[0])
+                    entry_obj.delete(0, END)
+                    entry_obj.insert(0, result)
+
+            # if user say to negate the value then showMinusSign() insert '-' sign at beginning
+            if text.find("negative") != -1:
+                showMinusSign()
+
         except:
             pass
 
