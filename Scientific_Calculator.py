@@ -4,13 +4,14 @@ from tkinter import *
 import numpy as np
 from pygame import mixer
 import speech_recognition
+from PIL import Image, ImageTk
 import math
 
 # root is instance of Tk class
 root = Tk()
 
 # geometry() is use for give the size of GUI window and 500+50 is for bring the window in center
-root.geometry("508x612+500+50")
+root.geometry("540x608+500+50")
 
 # title() method is use for give the title of window 
 root.title("Scientific Calculator")
@@ -127,20 +128,9 @@ def power(baseVal, powerVal):
 ##==============================================================================================##
 
 ##=================================== Scientific Operations ======================================##
-def sin(val):
-    return np.sin(float(val))
-
-def cos(val):
-    return np.cos(float(val))
-
-def tan(val):
-    return np.tan(float(val))
 
 def square(val):
     return np.square(float(val))
-
-def sqrt(val):
-    return np.sqrt(float(val))
 
 def ln(val):
     return np.log(float(val))
@@ -173,8 +163,7 @@ arithmeticOperations = {
 
 # scientificOperations dictionary holds the scientific operation name and some other mathematical operation name and function name as value
 scientificOperations = {
-    "SIN":sin, "COS":cos, "TAN":tan, "SQUARE":square, "ROOT":sqrt, "LOGARITHMIC":ln,
-    "LOG":log, "DEGREE": deg, "RADIAN":rad, "FACTORIAL":fact, "RECIPROCAL": reciprocal
+    "SQUARE":square, "LOGARITHMIC":ln, "LOG":log, "DEGREE": deg, "RADIAN":rad, "FACTORIAL":fact, "RECIPROCAL": reciprocal
 }
 
 def findNumbers(l):
@@ -256,7 +245,12 @@ entry_obj = Entry(MainFrame, width=29, textvariable=entry_var, font="Arial 16 bo
 entry_obj.grid(columnspan=5, padx=1, pady=1)
 entry_obj.insert(0,"0")
 
-microphone_button = Button(MainFrame, text= "MIC", bd=5, height=4, width=4, command=audio)
+microphone_image = Image.open("./microphone.png")
+resize_microphone_image = microphone_image.resize((74,70))
+
+mic = ImageTk.PhotoImage(resize_microphone_image)
+
+microphone_button = Button(MainFrame, image= mic, bd=0, command=audio)
 microphone_button.grid(row=0, column=5, padx=1, pady=1)
 
 ## ======================================================== Entry screen ====================================================##
