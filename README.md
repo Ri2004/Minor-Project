@@ -8,5 +8,6 @@ The Scientific Calculator is a versatile tool for perform complex mathematical e
 [MIT](https://choosealicense.com/licenses/mit/)
 
 ## Preview of Project
-![Scientific_calculator_preview](https://github.com/Ri2004/Minor-Project/assets/121394465/adff7f23-fc96-470e-a5f8-e4d2a038055d)
+![Screenshot 2024-05-10 164349](https://github.com/Ri2004/Minor-Project/assets/121394465/70abc48a-f406-438c-86ef-e28a47a3b9b0)
+
 
