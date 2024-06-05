@@ -11,7 +11,7 @@ import math
 root = Tk()
 
 # geometry() is use for give the size of GUI window and 500+50 is for bring the window in center
-root.geometry("540x608+500+50")
+root.geometry("540x608+660+100")
 
 # title() method is use for give the title of window 
 root.title("Scientific Calculator")
