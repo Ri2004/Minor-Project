@@ -11,7 +11,7 @@ import math
 root = Tk()
 
 # geometry() is use for give the size of GUI window and 500+50 is for bring the window in center
-root.geometry("540x608+660+100")
+root.geometry("540x608+500+50")
 
 # title() method is use for give the title of window 
 root.title("Scientific Calculator")
@@ -101,8 +101,11 @@ def equal():
         # Insert the result into the entry field
         entry_obj.insert(0, result)
         
-    except Exception as obj:
-        entry_obj.insert(0, obj)
+    except:
+        # Evaluate the expression using eval() function
+        result = eval(expression)
+        # Insert the result into the entry field
+        entry_obj.insert(0, result)
 
 ##=================================== Arithmetic Operations ======================================##
 def add(a,b):
